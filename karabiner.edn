@@ -238,6 +238,7 @@ end tell'";
          :rules [:open-mode
                  [:k [:code-project "~/.config/karabiner" "~/.config/karabiner.edn"]]
                  [:m [:code-project "~/minne"]]
+                 [:r [:code-project "~/Developer/github/recept"]]
                  ;
                  ]}
 
