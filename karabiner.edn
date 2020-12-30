@@ -43,10 +43,11 @@
        :close_paren {:key :9 :modi :shift}
 
        :insert_line_below {:key :return_or_enter :modi :command} ;!Creturn_or_enter
-       :insert_line_above {:key :return_or_enter :modi :cs} ;!CSreturn_or_enter
+       :insert_line_above {:key :return_or_enter :modi :cs}      ;!CSreturn_or_enter
 
        :expand_selection {:key :right_arrow :modi :cst}
-       :shrink_selection {:key :left_arrow :modi :cst}       ;
+       :shrink_selection {:key :left_arrow :modi :cst}
+       ;
        }
 
  :profiles {:Default {:default true
@@ -59,9 +60,6 @@
                       :held    500   ;; to_if_held_down_threshold_milliseconds (def: 500)
                                 ;; key is fired twice when 500 ms is elapsed (otherwise seen as a hold command)
                       :simlayer-threshold 500}} ;; profiles
- :layers {;
-;          :tab-mode {:key :tab :alone {:key :tab}} ; Hold for tab-mode, single press is just normal tab
-          }
 
  :simlayers {;
              :alt-mode {:key :a}             ;; hjkl movement with alt
