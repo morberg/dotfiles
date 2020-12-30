@@ -211,8 +211,9 @@ end tell'";
                  ;
                  ]}
 
-        {:des "Entering brackets"
+        {:des "Entering special characters"
          :rules [:spacebar-mode
+                 [:t :!Oclose_bracket]      ;  ~ tilde
                 ;symbols [](){}
                  [:a :open_square_bracket]
                  [:s :close_square_bracket]
