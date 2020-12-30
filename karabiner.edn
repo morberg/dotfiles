@@ -1,0 +1,284 @@
+{;; !  | means mandatory -   modifier(s) alone when pressend change behavior
+    ;; #  | means optional  -   modifiers are optional (but atleast one necessary)
+
+    ;; :!Ca is keycode :a and prefix a with !C
+
+    ;; C  | left_command
+    ;; T  | left_control
+    ;; O  | left_option
+    ;; S  | left_shift
+    ;; F  | fn
+    ;; Q  | right_command
+    ;; W  | right_control
+    ;; E  | right_option
+    ;; R  | right_shift
+
+    ;; ## | optional any (this has no effect when used on the RHS; only LHS)
+    ;; !! | command + control + optional + shift (hyper)
+
+    ;; to understand better how modifiers work in karabiner
+    ;; karabiner definition of mandatory and optional
+    ;; https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/from/modifiers/
+
+
+    ;; need to prefix C T O S F with ! or #
+    ;;
+    ;; code for all this:
+    ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/b9b334a187379f9bc8182ad59e2cca2a1789e9c0/src/karabiner_configurator/keys.clj#L68
+
+ :modifiers {;
+             :super-hyper [:command :shift :control :option :fn]
+             :hyper [:command :shift :control :option]
+             :cos [:command :shift :option]
+             :cst [:command :shift :control]
+             :co [:command :option]
+             :cs [:command :shift]
+             :ct [:command :control]
+             :to [:control :option]
+             :ts [:control :shift]
+             :os [:option :shift]
+             ;
+             }
+ :tos {;
+       ;named symbols
+       :open_square_bracket {:key :8 :modi :option}
+       :close_square_bracket {:key :9 :modi :option}
+
+       :open_brace {:key :8 :modi [:shift :option]}
+       :close_brace {:key :9 :modi [:shift :option]}
+
+       :open_paren {:key :8 :modi :shift}
+       :close_paren {:key :9 :modi :shift}
+
+       :insert_line_below {:key :return_or_enter :modi :command} ;!Creturn_or_enter
+       :insert_line_above {:key :return_or_enter :modi :cs} ;!CSreturn_or_enter
+       :delete_line {:key :k :modi :cs} ;!CSk
+
+       :expand_selection {:key :right_arrow :modi :cst}
+       :shrink_selection {:key :left_arrow :modi :cst}       ;
+       }
+
+ :profiles {:Default {:default true
+                      :sim     200    ;; simultaneous_threshold_milliseconds (def: 50)
+                                ;; keys need to be pressed within this threshold to be considered simultaneous
+                      :delay   200    ;; to_delayed_action_delay_milliseconds (def: 500)
+                                ;; basically it means time after which the key press is count delayed
+                      :alone   500    ;; to_if_alone_timeout_milliseconds (def: 1000)
+                                ;; hold for 995s and single tap registered; hold for 1005s and seen as modifier
+                      :held    500   ;; to_if_held_down_threshold_milliseconds (def: 500)
+                                ;; key is fired twice when 500 ms is elapsed (otherwise seen as a hold command)
+                      :simlayer-threshold 500}} ;; profiles
+ :layers {;
+;          :tab-mode {:key :tab :alone {:key :tab}} ; Hold for tab-mode, single press is just normal tab
+          }
+
+ :simlayers {;
+             :alt-mode {:key :a}             ;; hjkl movement with alt
+             :alt-shift-mode {:key :s}       ;; hjkl movement with alt-shift
+             :d-mode {:key :d}               ;; hjkl movement with shift
+             :f-mode {:key :f}               ;; Hold down f to enable cursor movement with hjkl
+
+             :delete-mode {:key :j}
+
+             :spacebar-mode {:key :spacebar} ;; Hold spacebar to enter []() with asdf
+             :open-mode {:key :o}            ;; Open files in VS code
+             :emoji-mode {:key :z}
+             :tab-mode {:key :tab}           ;; Open tab in Safari
+             :launch-mode {:key :l}          ;; Launch applications
+             ;
+             }
+
+ :templates {;
+             :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' &&
+                            open -a 'Visual Studio Code' %s -g %s
+                            "
+             :launch "osascript -e 'tell application \"%s\" to activate'"
+             :paste "osascript -e '
+                        set the clipboard to \"%s\"
+                        tell application \"System Events\"
+                                keystroke \"v\" using command down
+                        end tell
+                        '"
+             :open-safari "osascript -e '
+set tabURL to \"%s\"
+
+tell application \"Safari\"
+	activate
+	if not (exists window 1) then reopen
+	set windowsList to index of every window
+	repeat with w in windowsList
+		try
+			tell window w
+				set current tab to (first tab whose URL contains tabURL)
+				return
+			end tell
+			set index of window i to 1
+			exit repeat
+		end try
+	end repeat
+	open location \"http://\" & tabURL
+end tell'";
+             }
+
+ :applications {;
+                :code ["com.microsoft.VSCode"]
+                :teams ["com.microsoft.teams"]
+                :terminal ["com.apple.Terminal"]
+                :outlook ["com.microsoft.Outlook"]
+                ;
+                }
+
+ :main [;; each manipulator has a description and multiple rules
+
+    ;;{:des "..."                               ;; -> description
+    ;; :rules[
+    ;;          [<from>  <to>  <conditions>]    ;; -> rule 1
+    ;;          [<from>  <to>  <conditions>]    ;; -> rule 2
+    ;; ]}
+
+    ;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
+    ;;       |_____| |_______________| |_| |_________________________________________|
+    ;;        <from>    <to>      <conditions>         <other options>
+    ;;
+    ;; karabiner docs: ;; https://pqrs.org/osx/karabiner/json.html#complex_modifications-manipulator-definition
+    ;; <other options> includs ~to_if_alone~, ~to_if_held_down~,~to_after_key_up~, ~to_delayed_action~ and ~parameters~.
+    ;;
+
+    ;; (custom variables) & modifiers -> Advanced
+    ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org#custom-variable       
+        {:des "Caps lock -> left command or escape"
+         :rules [[:##caps_lock :left_command nil {:alone :escape}]]}
+
+        {:des "delete"
+         :rules [:delete-mode
+                 [:a :delete_or_backspace]    ; delete character to the left of insertion point
+                 [:s :!Tw :terminal]          ; delete word in Terminal
+                 [:s :!Odelete_or_backspace]  ; delete word to the left of insertion point
+                 [:d :!Odelete_forward]       ; delete word to the right of insertion point
+                 [:f :delete_forward]         ; delete character to the right of insertion point
+
+                 [:k :delete_line :code]      ; delete entire line in VS codea
+                 ;
+                 ]}
+
+        {:des "Homerow movement"
+         :rules [:f-mode
+                 [:##y :!Cleft_arrow]  ; End of line
+                 [:##u :!Fdown_arrow]  ; Page down
+                 [:##i :!Fup_arrow]    ; Page up
+                 [:##o :!Cright_arrow] ; Beginning of line
+
+                 [:##h :left_arrow]
+                 [:##j :down_arrow]
+                 [:##k :up_arrow]
+                 [:##l :right_arrow]
+
+                 [:return_or_enter :insert_line_below]
+
+                 [:left_shift :expand_selection]
+
+                 [:##m :!SCm :outlook] ; Move mail to folder in f-mode
+                 [:##r :!SCr :outlook] ; Reply all
+                 ;
+                 ]}
+
+        {:des "Homerow shift"
+         :rules [:d-mode
+                 [:##y :!Shome]
+                 [:##o :!Send]
+
+                 [:##h :!Sleft_arrow]
+                 [:##j :!Sdown_arrow]
+                 [:##k :!Sup_arrow]
+                 [:##l :!Sright_arrow]
+
+                 [:left_shift :shrink_selection]
+                 [:return_or_enter :insert_line_above]
+
+                 [:##m :!SCm :outlook] ; Move mail to folder in f-mode
+                 ;
+                 ]}
+
+        {:des "Homerow alt"
+         :rules [:alt-mode
+                 [:##y :!Fup_arrow]    ; Page up
+                 [:##o :!Fdown_arrow]  ; Page down
+
+                 [:##h :!Oleft_arrow]  ; Move cursor a word to the left
+                 [:##j :!Odown_arrow]  ; Move entire line up
+                 [:##k :!Oup_arrow]    ; Move entire line down
+                 [:##l :!Oright_arrow] ; Move cursor a word to the right
+                 ;
+                 ]}
+
+        {:des "Entering brackets"
+         :rules [:spacebar-mode
+                ;symbols [](){}
+                 [:a :open_square_bracket]
+                 [:s :close_square_bracket]
+                 [:d :open_paren]
+                 [:f :close_paren]
+
+                 [:g :!O7]                  ; | pipe
+                 [:h [:!SE7]]               ; \ Backslash
+
+                 [:j :open_brace]
+                 [:k :close_brace]
+                 [:l :!Sequal_sign]         ; ` Backtick
+
+                 [:comma :grave_accent_and_tilde]    ; , to <
+                 [:period :!Sgrave_accent_and_tilde] ; . to >
+                 [:slash :!S7]              ; - (:slash in Karabiner) to '/' on Swedish keyboard
+                 ;
+                 ]}
+
+        {:des "Open files"
+         :rules [:open-mode
+                 [:k [:code-project "~/.config/karabiner" "~/.config/karabiner.edn"]]
+                 [:m [:code-project "~/minne"]]
+                 ;
+                 ]}
+
+        {:des "Emojis"
+         :rules [:emoji-mode
+                 [:h [:paste "🤗"]] ; Hug
+                 [:k [:paste "😘"]] ; Kiss
+                 [:l [:paste "🥰"]] ; Love
+                 [:u [:paste "👍"]] ; Thumbs Up
+                 [:y [:paste "😋"]] ; Yum
+                 ;
+                 ]}
+
+        {:des "Open tabs in Safari"
+         :rules [:tab-mode
+                 [:c [:open-safari "morberg.github.io/covid-notebook/covid.html"]]
+                 [:e [:open-safari "morberg.github.io/covid-notebook/excess.html"]]
+                 [:g [:open-safari "github.com"]]
+                 [:m [:open-safari "mail.google.com"]]
+                 [:r [:open-safari "morberg.github.io/recept/"]]
+                 [:s [:open-safari "svt.se"]]
+                 [:t [:open-safari "twitter.com"]]
+                 [:y [:open-safari "sydsvenskan.se"]]
+                 ;
+                 ]}
+
+        {:des "Launch applications"
+         :rules [:launch-mode
+                 [:e [:launch "Microsoft Excel"]]
+                 [:f [:launch "Finder"]]
+                 [:m [:launch "Microsoft Outlook"]]
+                 [:p [:launch "Microsoft PowerPoint"]]
+                 [:r [:launch "Terminal"]] ; teRminal
+                 [:s [:launch "Spotify"]]
+                 [:t [:launch "Microsoft Teams"]]
+                 [:w [:launch "Safari"]]
+                 ;
+                 ]}
+
+        {:des "Outlook"
+         :rules [:outlook
+                 [:!Cl :!SCf]    ; Search
+                 ;
+                 ]}
+        ;
+]} ;; main
