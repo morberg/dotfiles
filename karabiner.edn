@@ -124,6 +124,7 @@ end tell'";
                 :code ["com.microsoft.VSCode"]
                 :teams ["com.microsoft.teams"]
                 :terminal ["com.apple.Terminal"]
+                :safari ["com.apple.Safari"]
                 :outlook ["com.microsoft.Outlook"]
                 ;
                 }
@@ -252,8 +253,8 @@ end tell'";
 
         {:des "Open tabs in Safari"
          :rules [:tab-mode
-                 [:1 :!TC1] ; Show bookmarks sidebar
-                 [:2 :!TC2] ; Show reading list sidebar
+                 [:1 :!TC1 :safari] ; Show bookmarks sidebar
+                 [:2 :!TC2 :safari] ; Show reading list sidebar
                  [:c [:open-safari "morberg.github.io/covid-notebook/covid.html"]]
                  [:e [:open-safari "morberg.github.io/covid-notebook/excess.html"]]
                  [:g [:open-safari "github.com"]]
