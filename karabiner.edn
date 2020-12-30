@@ -213,22 +213,22 @@ end tell'";
 
         {:des "Entering special characters"
          :rules [:spacebar-mode
-                 [:t :!Oclose_bracket]      ;  ~ tilde
+                 [:t :!Oclose_bracket]      ; ~
                 ;symbols [](){}
-                 [:a :open_square_bracket]
-                 [:s :close_square_bracket]
-                 [:d :open_paren]
-                 [:f :close_paren]
+                 [:a :open_square_bracket]  ; [
+                 [:s :close_square_bracket] ; ]
+                 [:d :open_paren]           ; (
+                 [:f :close_paren]          ; )
 
-                 [:g :!O7]                  ; | pipe
-                 [:h [:!SE7]]               ; \ Backslash
+                 [:g :!O7]                  ; |
+                 [:h [:!SE7]]               ; \
 
-                 [:j :open_brace]
-                 [:k :close_brace]
-                 [:l :!Sequal_sign]         ; ` Backtick
+                 [:j :open_brace]           ; {
+                 [:k :close_brace]          ; }
+                 [:l :!Sequal_sign]         ; `
 
-                 [:comma :grave_accent_and_tilde]    ; , to <
-                 [:period :!Sgrave_accent_and_tilde] ; . to >
+                 [:comma :grave_accent_and_tilde]    ; <
+                 [:period :!Sgrave_accent_and_tilde] ; >
                  [:slash :!S7]              ; - (:slash in Karabiner) to '/' on Swedish keyboard
                  ;
                  ]}
