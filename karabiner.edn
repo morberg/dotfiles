@@ -252,6 +252,8 @@ end tell'";
 
         {:des "Open tabs in Safari"
          :rules [:tab-mode
+                 [:1 :!TC1] ; Show bookmarks sidebar
+                 [:2 :!TC2] ; Show reading list sidebar
                  [:c [:open-safari "morberg.github.io/covid-notebook/covid.html"]]
                  [:e [:open-safari "morberg.github.io/covid-notebook/excess.html"]]
                  [:g [:open-safari "github.com"]]
