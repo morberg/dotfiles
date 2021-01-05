@@ -1,4 +1,5 @@
-{;; !  | means mandatory -   modifier(s) alone when pressend change behavior
+{;; Lots of inspiration from https://github.com/johnlindquist/dotfiles/blob/master/karabiner/karabiner.edn
+    ;; !  | means mandatory -   modifier(s) alone when pressend change behavior
     ;; #  | means optional  -   modifiers are optional (but atleast one necessary)
 
     ;; :!Ca is keycode :a and prefix a with !C
