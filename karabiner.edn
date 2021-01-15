@@ -154,10 +154,10 @@ end tell'";
 
         {:des "Homerow movement"
          :rules [:f-mode
-                 [:##y :!Cleft_arrow]  ; End of line
+                 [:##y :!Cleft_arrow]  ; Beginning of line
                  [:##u :!Fdown_arrow]  ; Page down
                  [:##i :!Fup_arrow]    ; Page up
-                 [:##o :!Cright_arrow] ; Beginning of line
+                 [:##o :!Cright_arrow] ; End of line
 
                  [:##h :left_arrow]
                  [:##j :down_arrow]
@@ -202,8 +202,18 @@ end tell'";
                  ;
                  ]}
 
+        {:des "Homerow alt+shift"
+         :rules [:alt-shift-mode
+                 [:##h :!OSleft_arrow]
+                 [:##j :!OSdown_arrow]
+                 [:##k :!OSup_arrow]
+                 [:##l :!OSright_arrow]
+                 ;
+                 ]}
+
         {:des "Entering special characters"
          :rules [:spacebar-mode
+                 [:q :!O2]                  ; @
                  [:t :!Oclose_bracket]      ; ~
                 ;symbols [](){}
                  [:a :open_square_bracket]  ; [
@@ -234,18 +244,25 @@ end tell'";
 
         {:des "Emojis"
          :rules [:emoji-mode
+                 [:d [:paste "👎"]] ; thumbs Down
                  [:h [:paste "🤗"]] ; Hug
                  [:k [:paste "😘"]] ; Kiss
                  [:l [:paste "🥰"]] ; Love
-                 [:u [:paste "👍"]] ; Thumbs Up
+                 [:p [:paste "🥺"]] ; Please
+                 [:s [:paste "😊"]] ; Smile
+                 [:u [:paste "👍"]] ; thumbs Up
+                 [:w [:paste "😉"]] ; Wink
                  [:y [:paste "😋"]] ; Yum
                  ;
                  ]}
 
-        {:des "Open tabs in Safari"
+        {:des "Safari shortcuts"
          :rules [:tab-mode
                  [:1 :!TC1 :safari] ; Show bookmarks sidebar
                  [:2 :!TC2 :safari] ; Show reading list sidebar
+                 [:h :!SCleft_arrow :safari]  ; Cycle to previous tab
+                 [:l :!SCright_arrow :safari] ; Cycle to next tab
+
                  [:c [:open-safari "morberg.github.io/covid-notebook/covid.html"]]
                  [:e [:open-safari "morberg.github.io/covid-notebook/excess.html"]]
                  [:g [:open-safari "github.com"]]
