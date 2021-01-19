@@ -280,10 +280,10 @@ end tell'";
                  [:f [:launch "Finder"]]
                  [:m [:launch "Microsoft Outlook"]]
                  [:p [:launch "Microsoft PowerPoint"]]
-                 [:r [:launch "Terminal"]] ; teRminal
+                 [:r [:launch "Terminal"]]              ; teRminal
                  [:s [:launch "Spotify"]]
                  [:t [:launch "Microsoft Teams"]]
-                 [:w [:launch "Safari"]]
+                 [:w [:launch "Safari"]]                ; Web
                  ;
                  ]}
 
