@@ -74,7 +74,7 @@
              :open-mode {:key :o}            ;; Open files in VS code
              :emoji-mode {:key :z}
              :tab-mode {:key :tab}           ;; Open tab in Safari
-             :launch-mode {:key :l}          ;; Launch applications
+             :launch-mode {:key :q}          ;; Launch applications
              ;
              }
 
@@ -261,7 +261,7 @@ end tell'";
                  [:1 :!TC1 :safari] ; Show bookmarks sidebar
                  [:2 :!TC2 :safari] ; Show reading list sidebar
                  [:h :!SCleft_arrow :safari]  ; Cycle to previous tab
-                 [:l :!SCright_arrow :safari] ; Cycle to next tab
+                 [:l :!SCright_arrow :safari] ; Cycle to nnext tab
 
                  [:c [:open-safari "morberg.github.io/covid-notebook/covid.html"]]
                  [:e [:open-safari "morberg.github.io/covid-notebook/excess.html"]]
