@@ -243,6 +243,7 @@ end tell'";
                  ]}
 
         {:des "Emojis"
+        ;; For some reason this changes the font after entering an emoji (at least in Outlook)
          :rules [:emoji-mode
                  [:d [:paste "👎"]] ; thumbs Down
                  [:h [:paste "🤗"]] ; Hug
