@@ -175,8 +175,10 @@ end tell'";
 
         {:des "Homerow shift"
          :rules [:d-mode
-                 [:##y :!Shome]
-                 [:##o :!Send]
+                 [:##y :!Shome] ; Beginning of line
+                 [:##u :!SFdown_arrow]  ; Page down
+                 [:##i :!SFup_arrow]    ; Page up
+                 [:##o :!Send]  ; End of line
 
                  [:##h :!Sleft_arrow]
                  [:##j :!Sdown_arrow]
@@ -251,6 +253,7 @@ end tell'";
                  [:l [:paste "🥰"]] ; Love
                  [:p [:paste "🥺"]] ; Please
                  [:s [:paste "😊"]] ; Smile
+                 [:t [:paste "🙏"]] ; Thank you
                  [:u [:paste "👍"]] ; thumbs Up
                  [:w [:paste "😉"]] ; Wink
                  [:y [:paste "😋"]] ; Yum
