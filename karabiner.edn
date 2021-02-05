@@ -71,7 +71,6 @@
              :delete-mode {:key :j}
 
              :spacebar-mode {:key :spacebar} ;; Hold spacebar to enter []() with asdf
-             :open-mode {:key :o}            ;; Open files in VS code
              :emoji-mode {:key :z}
              :tab-mode {:key :tab}           ;; Open tab in Safari
              :launch-mode {:key :q}          ;; Launch applications
@@ -236,14 +235,6 @@ end tell'";
                  ;
                  ]}
 
-        {:des "Open files"
-         :rules [:open-mode
-                 [:k [:code-project "~/.config/karabiner" "~/.config/karabiner.edn"]]
-                 [:m [:code-project "~/minne"]]
-                 [:r [:code-project "~/Developer/github/recept"]]
-                 ;
-                 ]}
-
         {:des "Emojis"
         ;; For some reason this changes the font after entering an emoji (at least in Outlook)
          :rules [:emoji-mode
@@ -280,11 +271,13 @@ end tell'";
 
         {:des "Launch applications"
          :rules [:launch-mode
+                 [:a [:code-project "~/minne"]] ;; Anteckningar
                  [:e [:launch "Microsoft Excel"]]
                  [:f [:launch "Finder"]]
+                 [:k [:code-project "~/.config/karabiner" "~/.config/karabiner.edn"]]
                  [:m [:launch "Microsoft Outlook"]]
                  [:p [:launch "Microsoft PowerPoint"]]
-                 [:r [:launch "Terminal"]]              ; teRminal
+                 [:r [:code-project "~/Developer/github/recept"]]
                  [:s [:launch "Spotify"]]
                  [:t [:launch "Microsoft Teams"]]
                  [:w [:launch "Safari"]]                ; Web
