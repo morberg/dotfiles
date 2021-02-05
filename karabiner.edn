@@ -271,9 +271,9 @@ end tell'";
 
         {:des "Launch applications"
          :rules [:launch-mode
-                 [:a [:code-project "~/minne"]] ;; Anteckningar
                  [:e [:launch "Microsoft Excel"]]
                  [:f [:launch "Finder"]]
+                 [:i [:code-project "~/minne"]] ;; mInne
                  [:k [:code-project "~/.config/karabiner" "~/.config/karabiner.edn"]]
                  [:m [:launch "Microsoft Outlook"]]
                  [:p [:launch "Microsoft PowerPoint"]]
