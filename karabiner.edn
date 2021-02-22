@@ -188,7 +188,7 @@ end tell'";
                  [:left_shift :shrink_selection]
                  [:return_or_enter :insert_line_above]
 
-                 [:##m :!SCm :outlook] ; Move mail to folder in f-mode
+                 [:##m :!SCm :outlook] ; Move mail to folder in d-mode
                  ;
                  ]}
 
@@ -216,6 +216,7 @@ end tell'";
         {:des "Entering special characters"
          :rules [:spacebar-mode
                  [:q :!O2]                  ; @
+                 [:2 :!O2]                  ; @
                  [:t :!Oclose_bracket]      ; ~
                 ;symbols [](){}
                  [:a :open_square_bracket]  ; [
