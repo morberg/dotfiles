@@ -261,13 +261,10 @@ end tell'";
                  [:h :!SCleft_arrow :safari]  ; Cycle to previous tab
                  [:l :!SCright_arrow :safari] ; Cycle to next tab
 
-                 [:c [:open-safari "morberg.github.io/covid-notebook/covid.html"]]
-                 [:e [:open-safari "morberg.github.io/covid-notebook/excess.html"]]
                  [:g [:open-safari "github.com"]]
                  [:m [:open-safari "mail.google.com"]]
                  [:r [:open-safari "morberg.github.io/recept/"]]
                  [:s [:open-safari "svt.se"]]
-                 [:t [:open-safari "twitter.com"]]
                  [:y [:open-safari "sydsvenskan.se"]]
                  ;
                  ]}
@@ -290,7 +287,8 @@ end tell'";
 
         {:des "Outlook"
          :rules [:outlook
-                 [:!Cl :!SCf]    ; Search
+                 [:!Cl :!SCf]   ; Search through Cmd + L
+                 [:!Ce :!Te]    ; Archive with Cmd + E
                  ;
                  ]}
         ;
