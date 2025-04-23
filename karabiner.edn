@@ -110,13 +110,16 @@ tell application \"Safari\"
 	open location \"http://\" & tabURL
 end tell'";
              }
-
+;; Find bundle ID for running application with:
+;; lsappinfo info -only bundleid "Application Name"
+;; or in Karabiner-EventViewer
  :applications {;
                 :code ["com.microsoft.VSCode"]
                 :teams ["com.microsoft.teams"]
                 :terminal ["com.apple.Terminal"]
                 :safari ["com.apple.Safari"]
                 :outlook ["com.microsoft.Outlook"]
+                :brave ["com.brave.Browser"]
                 ;
                 }
 
@@ -289,6 +292,12 @@ end tell'";
          :rules [:outlook
                  [:!Cl :!SCf]   ; Search through Cmd + L
                  [:!Ce :!Te]    ; Archive with Cmd + E
+                 ;
+                 ]}
+
+        {:des "Brave"
+         :rules [:brave
+                 [:!Cz :!SCt]   ; Use Cmd + Z to undo closed tab
                  ;
                  ]}
         ;
